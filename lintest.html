@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>lintest</title>
+
+    <script src="https://copy.sh/v86/build/v86.js"></script>
+
+    <style>
+        body {
+            background: #111;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #screen {
+            width: 1024px;
+            height: 768px;
+            background: black;
+        }
+    </style>
+</head>
+<body>
+
+<div id="screen"></div>
+
+<script>
+    const emulator = new V86({
+        wasm_path: "https://copy.sh/v86/build/v86.wasm",
+
+        hda: {
+            url: "https://copy.sh/v86/images/alpine-linux.img"
+        },
+
+        memory_size: 512 * 1024 * 1024,
+        vga_memory_size: 32 * 1024 * 1024,
+
+        autostart: true,
+        screen_container: document.getElementById("screen"),
+    });
+</script>
+
+</body>
+</html>
