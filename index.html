@@ -1,47 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>lintest</title>
-
-    <script src="https://copy.sh/v86/build/v86.js"></script>
-
-    <style>
-        body {
-            background: #111;
-            margin: 0;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        #screen {
-            width: 1024px;
-            height: 768px;
-            background: black;
-        }
-    </style>
+  <meta charset="utf-8">
+  <title>Linux Emulator (Working v86)</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+    }
+    #screen {
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
 </head>
 <body>
 
 <div id="screen"></div>
 
+<script src="https://copy.sh/v86/build/v86.js"></script>
 <script>
-    const emulator = new V86({
-        wasm_path: "https://copy.sh/v86/build/v86.wasm",
+const emulator = new V86({
+  wasm_path: "https://copy.sh/v86/build/v86.wasm",
 
-        hda: {
-            url: "https://copy.sh/v86/images/alpine-linux.img"
-        },
+  memory_size: 256 * 1024 * 1024,
 
-        memory_size: 512 * 1024 * 1024,
-        vga_memory_size: 32 * 1024 * 1024,
+  screen_container: document.getElementById("screen"),
 
-        autostart: true,
-        screen_container: document.getElementById("screen"),
-    });
+  bios: {
+    url: "https://copy.sh/v86/bios/seabios.bin"
+  },
+
+  vga_bios: {
+    url: "https://copy.sh/v86/bios/vgabios.bin"
+  },
+
+  // IMPORTANT: working buildroot image
+  hda: {
+    url: "https://copy.sh/v86/images/linux3.img"
+  },
+
+  autostart: true
+});
 </script>
 
 </body>
